@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/food-picker/static/css/main.2f4c407b.css",
+    "main.js": "/food-picker/static/js/main.82346423.js",
+    "index.html": "/food-picker/index.html",
+    "main.2f4c407b.css.map": "/food-picker/static/css/main.2f4c407b.css.map",
+    "main.82346423.js.map": "/food-picker/static/js/main.82346423.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2f4c407b.css",
+    "static/js/main.82346423.js"
+  ]
+}
