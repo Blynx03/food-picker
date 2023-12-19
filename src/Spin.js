@@ -29,7 +29,7 @@ const Spin = () => {
   //   console.log(copiedChoices);
 
   let counter = 0;
-  while (counter <= Math.floor(1000 / foodChoices.length)) {
+  while (counter <= Math.floor(500 / foodChoices.length)) {
     foodChoices.forEach((food) => {
       wheelContent.push(food);
     });
@@ -45,7 +45,8 @@ const Spin = () => {
   }, [refFoodContainer]);
 
   function handleSpin() {
-    refFoodContainer.current.style.animation = "spin 6500ms ease-out forwards";
+    refFoodContainer.current.style.animation =
+      "spin-fast 2000ms linear, spin 4500ms ease-out 2000ms forwards";
   }
 
   return (

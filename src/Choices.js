@@ -67,7 +67,6 @@ const Choices = () => {
       <div className="choices-title">Pick Your Choices</div>
       <div className="choices-container">
         {foodList.map(({ place, onChoices }, index) => {
-          console.log("this is running foodlist");
           return (
             <div className="choice-container" key={place + index}>
               <input
@@ -102,12 +101,14 @@ const Choices = () => {
           ></input>
         </div>
       </div>
-      <div ref={refNoChoices} className="no-choices-container">
-        Pick your selections first..
+      <div className="no-choices-enter-btn-container">
+        <div ref={refNoChoices} className="no-choices">
+          Pick your selections first..
+        </div>
+        <button className="enter-button" onClick={handleClick}>
+          Enter the Spin Zone!
+        </button>
       </div>
-      <button className="enter-button" onClick={handleClick}>
-        Enter the Spin Zone!
-      </button>
     </div>
   );
 };

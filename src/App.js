@@ -4,6 +4,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Spin from "./Spin";
 import Choices from "./Choices";
+import Design from "./Design";
 import { UserContext } from "./UserContext";
 
 // make a static header
@@ -44,6 +45,7 @@ const App = () => {
           setAreChoicesIn,
         }}
       >
+        <Design />
         <Header />
         {areChoicesIn ? <Spin /> : <Choices />}
         <Footer />

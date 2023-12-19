@@ -11,8 +11,10 @@
 }
 
 .main-container {
+  position: relative;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
   background-image: linear-gradient(
     180deg,
     rgb(31, 131, 245) 0%,
@@ -21,7 +23,38 @@
   );
 }
 
+.design-container {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  top: -14%;
+  left: -36%;
+  transform: rotate(-20deg);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* z-index: -4; */
+}
+
+.design-pattern-container {
+  width: 100%;
+  height: 20%;
+  padding: 5%;
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  color: rgba(14, 98, 195, 0.35);
+}
+
+.design-pattern {
+  font-family: var(--font-titan);
+  font-size: 1.4rem;
+}
+
 .app-title-container {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   padding: 10px;
   display: flex;
@@ -38,11 +71,15 @@
 }
 
 .choices-section-container {
+  position: relative;
+  top: 12%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
   align-items: center;
   padding: 2%;
+  height: 85%;
+  z-index: 1;
 }
 
 .choices-title {
@@ -52,14 +89,15 @@
 }
 
 .choices-container {
-  width: 100%;
-  max-height: 680px;
-  height: 500px;
+  font-size: 0.85rem;
+  width: 90%;
+  top: 5%;
+  height: 60%;
   overflow: scroll;
   display: flex;
   flex-wrap: wrap;
   padding: 5%;
-  background-color: rgba(239, 234, 228, 0.6);
+  background-color: rgba(239, 234, 228, 0.7);
   border: none;
   border-radius: 10px;
   margin-top: 10px;
@@ -74,16 +112,19 @@
 }
 
 .choices {
+  position: relative;
+  z-index: 5;
   margin-right: 10px;
 }
 
 .added-choice-container {
   width: 100%;
-  padding: 30px 10px 10px 10px;
+  padding: 10px 5px;
   display: flex;
   flex-direction: row;
   gap: 10px;
   justify-content: center;
+  font-size: 0.8rem;
   align-items: center;
 }
 
@@ -99,51 +140,63 @@
   font-size: 0.7rem;
 }
 
+.no-choices-enter-btn-container {
+  height: 30%;
+  width: 100%;
+  position: absolute;
+  bottom: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.no-choices {
+  color: red;
+  font-size: 1.2rem;
+  animation: blink 2000ms ease forwards;
+  display: none;
+}
+
 .enter-button {
+  width: 70%;
   padding: 3%;
   font-size: 1.2rem;
   border: none;
   border-radius: 8px;
-  position: fixed;
-  bottom: 14%;
   color: rgb(251, 237, 29);
   text-shadow: 0 0 3px black;
   background-color: rgb(31, 158, 248);
   box-shadow: 0 0 10px gray;
 }
 
-.no-choices-container {
-  color: red;
-  font-size: 1.2rem;
-  margin-top: 50px;
-  animation: blink 1000s linear alternate;
-  display: none;
-}
-
 @keyframes blink {
   0%,
+  40%,
+  60%,
   100% {
     opacity: 1;
   }
-  50% {
+  20%,
+  80% {
     opacity: 0;
   }
 }
 
 /* Spin Page */
 .spin-container {
-  height: 70%;
   position: relative;
+  top: 12%;
+  height: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  margin-top: 10px;
 }
 
 .wheel-container {
   position: relative;
-  width: 300px;
+  width: 320px;
   height: 200px;
   border: 10px solid;
   border-image: linear-gradient(20deg, gray 0%, rgb(2, 71, 150) 50%, gray 100%);
@@ -165,10 +218,10 @@
 
 .wheel-pointer {
   position: absolute;
-  clip-path: polygon(76% 27%, 100% 50%, 76% 67%, 0 67%, 27% 50%, 0 27%);
+  clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
   width: 60px;
-  height: 30px;
-  top: calc(50% - 15px);
+  height: 50px;
+  top: calc(50% - 25px);
   left: -30px;
   background-color: red;
 }
@@ -182,20 +235,28 @@
   flex-direction: column;
   gap: 24px;
   align-items: center;
-  /* animation: spin 15000ms ease-out forwards; */
 }
 
 @keyframes spin {
   0% {
-    top: -37000px;
+    top: -5000px;
   }
   100% {
-    top: -688px;
+    top: -696px;
+  }
+}
+
+@keyframes spin-fast {
+  0% {
+    top: -28000px;
+  }
+  100% {
+    top: -5000px;
   }
 }
 
 .place {
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 .middle-part {
@@ -239,7 +300,7 @@
 }
 
 .footer-container {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   text-align: center;
   width: 100%;

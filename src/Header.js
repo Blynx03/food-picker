@@ -4,8 +4,9 @@ import "./App.css";
 const Header = () => {
   return (
     <>
-      <div className="app-title-container"></div>
-      <div className="app-title">Food Picker</div>
+      <div className="app-title-container">
+        <div className="app-title">Food Picker</div>
+      </div>
     </>
   );
 };
