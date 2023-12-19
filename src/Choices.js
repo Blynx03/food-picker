@@ -35,7 +35,14 @@ const Choices = () => {
       }
     } else if (e.key === "Backspace" || e.key === "Delete") {
       enteredKeys.pop();
-    } else if (e.key === "CapsLock" || e.key === "Shift" || e.key === "Tab") {
+    } else if (
+      e.key === "CapsLock" ||
+      e.key === "Shift" ||
+      e.key === "Tab" ||
+      e.key === "Meta" ||
+      e.key === "Alt" ||
+      e.key === "Control"
+    ) {
       return;
     } else {
       enteredKeys.push(e.key);
