@@ -11,23 +11,23 @@ import { UserContext } from "./UserContext";
 
 const App = () => {
   const [foodList, setFoodList] = useState([
-    { place: "Mc D", onChoices: false },
+    { place: "McDonalds", onChoices: false },
     {
       place: "Spicy Dragon",
       onChoices: false,
     },
 
     { place: "Greek Freak", onChoices: false },
-    { place: "PTC", onChoices: false },
-    { place: "Sansotei", onChoices: false },
+    { place: "Kiu Japanese", onChoices: false },
+    { place: "Sansotei Ramen", onChoices: false },
     { place: "Congee Queen", onChoices: false },
-    { place: `Wendy's`, onChoices: false },
+    { place: `Paramount`, onChoices: false },
     { place: "Jollibee", onChoices: false },
     { place: `Mom's Kitchen`, onChoices: false },
-    { place: "MamaLu", onChoices: false },
-    { place: "Estacion", onChoices: false },
-    { place: "Bistro Manila", onChoices: false },
-    { place: "EDO", onChoices: false },
+    { place: "Odine Japanese", onChoices: false },
+    { place: "The Keg", onChoices: false },
+    { place: "Wendy's", onChoices: false },
+    { place: "Nando's Peri Peri", onChoices: false },
   ]);
 
   const [areChoicesIn, setAreChoicesIn] = useState(false);

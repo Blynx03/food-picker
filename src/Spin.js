@@ -45,7 +45,7 @@ const Spin = () => {
   }, [refFoodContainer]);
 
   function handleSpin() {
-    refFoodContainer.current.style.animation = "spin 15000ms ease-out forwards";
+    refFoodContainer.current.style.animation = "spin 6500ms ease-out forwards";
   }
 
   return (
@@ -68,7 +68,13 @@ const Spin = () => {
       <button className="spin-button" onClick={handleSpin}>
         SPIN!
       </button>
-      <button className="back-button" onClick={() => setAreChoicesIn(false)}>
+      <button
+        className="back-button"
+        onClick={() => {
+          setFoodChoices([]);
+          setAreChoicesIn(false);
+        }}
+      >
         Back to Choices!
       </button>
     </div>

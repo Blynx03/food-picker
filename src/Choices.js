@@ -9,41 +9,60 @@ const Choices = () => {
   const foodChoices = clientContext.foodChoices;
   const setAreChoicesIn = clientContext.setAreChoicesIn;
   const refNoChoices = useRef(null);
-  const enteredKeys = [];
+  let enteredKeys = [];
 
-  function handleKeyPress(e) {
+  let hasChoice = foodList.some((food) => food.onChoices);
+
+  function handleKeyDown(e) {
+    console.log(e.key);
+    refNoChoices.current.style.display = "none";
+
     if (e.key === "Enter") {
       let newFood = enteredKeys.join("");
-      setFoodList([...foodList, { place: newFood, onChoices: true }]);
-      enteredKeys.length = 0; // this will reset the input field
-      document.querySelector(".added-choice-input").value = "";
+      let alreadyListed = foodList.some((food) => {
+        return food.place.toLowerCase() === newFood.toLowerCase();
+      });
+      if (alreadyListed) {
+        refNoChoices.current.style.display = "block";
+        refNoChoices.current.textContent = "This is already listed";
+        enteredKeys.length = 0;
+        return;
+      } else {
+        setFoodList([...foodList, { place: newFood, onChoices: true }]);
+        enteredKeys.length = 0; // this will reset the input field
+        document.querySelector(".added-choice-input").value = "";
+        refNoChoices.current.textContent = "Pick your selection first.";
+      }
+    } else if (e.key === "Backspace" || e.key === "Delete") {
+      enteredKeys.pop();
+    } else if (e.key === "CapsLock" || e.key === "Shift" || e.key === "Tab") {
+      return;
     } else {
       enteredKeys.push(e.key);
     }
   }
 
   function handleClick() {
-    let noChoices = 0;
-    foodList.forEach(({ place, onChoices }) => {
-      if (onChoices) {
-        foodChoices.push(place);
-        noChoices++;
-      }
-    });
-    if (noChoices <= 0) {
-      refNoChoices.current.style.visibility = "visible";
-      //   return;
+    if (hasChoice) {
+      foodList.forEach(({ place, onChoices }) => {
+        if (onChoices) {
+          foodChoices.push(place);
+        }
+      });
+      setAreChoicesIn(true);
+    } else {
+      refNoChoices.current.style.display = "block";
     }
-    setAreChoicesIn(true);
   }
 
   return (
-    <div className="choices-page-container">
+    <div className="choices-section-container">
       <div className="choices-title">Pick Your Choices</div>
       <div className="choices-container">
         {foodList.map(({ place, onChoices }, index) => {
+          console.log("this is running foodlist");
           return (
-            <div className="choice-container" key={place}>
+            <div className="choice-container" key={place + index}>
               <input
                 name={place}
                 type="checkbox"
@@ -51,14 +70,14 @@ const Choices = () => {
                 id={place}
                 checked={onChoices}
                 className="choices"
-                //   onChange={() => handleCheckboxChange(index)}
-                onChange={() =>
+                onChange={() => {
+                  refNoChoices.current.style.display = "none";
                   setFoodList((prevFoodList) => {
                     let updatedFoodList = [...prevFoodList];
                     updatedFoodList[index].onChoices = !onChoices;
                     return updatedFoodList;
-                  })
-                }
+                  });
+                }}
               />
               <label htmlFor={place}>{place}</label>
             </div>
@@ -71,7 +90,7 @@ const Choices = () => {
             id="added-choice"
             type="text"
             className="added-choice-input"
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyDown}
             placeholder="Enter Food/Restaurant..."
           ></input>
         </div>
