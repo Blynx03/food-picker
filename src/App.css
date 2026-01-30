@@ -91,19 +91,18 @@
 .choices-container {
   font-size: 0.85rem;
   width: clamp(340px, 60%, 600px);
-  top: 5%;
-  height: 60%;
+  height: auto;
   overflow: scroll;
   display: flex;
   flex-wrap: wrap;
-  padding: 5%;
+  padding: 2% 2.5%;
   background-color: rgba(239, 234, 228, 0.7);
   border: none;
   border-radius: 10px;
-  margin-top: 10px;
+  margin-top: 30px;
   box-shadow: 0 0 10px gray;
   justify-content: center;
-  position: relative;
+  gap: 10px;
 }
 
 .choice-container {
@@ -119,18 +118,63 @@
   margin-right: 10px;
 }
 
+.choices::marker {
+  font-size: 2rem;
+  color: red;
+}
+
+.choices {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #fff;
+  border-radius: 2px;
+  background-color: #93caf7;
+  cursor: pointer;
+  position: relative;
+}
+
+.choices:checked {
+  background-color: #0452ac;
+  border-color: #13ca13;
+  border-radius: 3px;
+}
+
+.choices:checked::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 0px;
+  width: 3px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.choices:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(233, 33, 2, 0.5);
+}
+
 .added-choice-container {
   width: 100%;
   padding: 10px 5px;
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 20px;
   justify-content: center;
   font-size: 0.8rem;
   align-items: center;
 }
 
+.added-choice-container label {
+  font-size: clamp(0.8rem, 2vw, 1.1rem);
+}
+
 .added-choice-container input {
+  width: clamp(150px, 20%, 170px);
   height: 30px;
   border-radius: 5px;
   border: none;
@@ -139,14 +183,14 @@
 
 .added-choice-container input::placeholder {
   padding: 0.5rem;
-  font-size: 0.7rem;
+  font-size: clamp(0.7rem, 1.4vw, 1rem);
 }
 
 .no-choices-enter-btn-container {
   height: 30%;
   width: 100%;
-  position: absolute;
-  bottom: 2%;
+  /* position: absolute; */
+  /* bottom: 2%; */
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -159,15 +203,15 @@ label {
 
 .no-choices {
   color: red;
-  font-size: clamp(1.2rem, 2vw, 2rem);
+  font-weight: bold;
+  font-size: clamp(1.2rem, 3vw, 2.2rem);
   animation: blink 2000ms ease forwards;
   display: none;
 }
 
 .enter-button {
-  width: clamp(200px, 70%, 400px);
-  padding: 1% 3%;
-  font-size: clamp(1.2rem, 2vw, 2rem);
+  padding: 1rem 2rem;
+  font-size: clamp(1.4rem, 2vw, 2rem);
   border: none;
   border-radius: 8px;
   color: rgb(251, 237, 29);
@@ -202,16 +246,16 @@ label {
 
 .wheel-container {
   position: relative;
-  width: clamp(320px, 40%, 500px);
+  width: 320px;
   height: 200px;
   border: 10px solid;
   border-image: linear-gradient(20deg, gray 0%, rgb(2, 71, 150) 50%, gray 100%);
   border-image-slice: 1;
   background-image: linear-gradient(
     0deg,
-    #fff 0%,
-    rgb(215, 210, 210) 50%,
-    #fff 100%
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(215, 210, 210, 0.5) 50%,
+    rgba(255, 255, 255, 0.4) 100%
   );
   overflow: hidden;
   box-shadow: 0 0 30px black;
@@ -219,9 +263,20 @@ label {
 
 .top-part,
 .bottom-part {
+  width: 100%;
+  position: absolute;
   height: 30%;
+  backdrop-filter: blur(3px);
+  z-index: 1;
 }
 
+.top-part {
+  top: 0;
+}
+
+.bottom-part {
+  top: 70%;
+}
 .wheel-pointer {
   position: absolute;
   clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
@@ -235,11 +290,9 @@ label {
 .food-choices-container {
   position: absolute;
   width: 100%;
-  /* height: 100%; */
-  padding: 5%;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 25px;
   align-items: center;
 }
 
@@ -262,7 +315,7 @@ label {
 }
 
 .place {
-  font-size: clamp(1.8rem, 3vw, 2.2rem);
+  font-size: 1.8rem;
 }
 
 .middle-part {
@@ -337,17 +390,41 @@ label {
   }
 
   .reset-button {
-    position: absolute;
     bottom: 20px;
-    padding: 0.5rem 2rem;
+    padding: 0.35rem 1.5rem;
   }
   
   .spin-button, .back-button {
     padding: 2rem 4rem;
   }
 
+  .wheel-container {
+    width: 400px;
+  }
+
   .food-choices-container {
-    gap: 20px;
-    padding: 2%;
+    gap: 25.5px;
+  }
+
+  .choices {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+  }
+
+  .choices:checked::after {
+    left: 6px;
+    top: 0px;
+    width: 4px;
+    height: 11px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+  }
+}
+
+@media screen and (min-width: 950px) {
+  .food-choices-container {
+    gap: 25.75px;
   }
 }

@@ -11,7 +11,6 @@ const Spin = () => {
   //   let elementHeight = 0;
 
   function shuffleArray(array) {
-    console.log('array ', array)
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
@@ -57,7 +56,7 @@ const Spin = () => {
         <div className="wheel-pointer"></div>
         <div className="top-part"></div>
         <div className="middle-part"></div>
-        <div className="top-part"></div>
+        <div className="bottom-part"></div>
       </div>
       <button className="spin-button" onClick={handleSpin}>
         SPIN!
