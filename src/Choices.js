@@ -12,7 +12,6 @@ const Choices = () => {
   let hasChoice = foodList.some((food) => food.onChoices);
 
   function handleKeyDown(e) {
-    console.log(e.key);
     noChoicesRef.current.style.display = "none";
 
     if (e.key === "Enter") {
@@ -54,7 +53,6 @@ const Choices = () => {
           foodChoices.push(place);
         }
       });
-      console.log('food choices length ', foodChoices.length)
       if (foodChoices.length < 2) {
         setAddMoreSelection(true);
         noChoicesRef.current.style.display = 'block';
@@ -70,9 +68,10 @@ const Choices = () => {
     setAreChoicesIn(false);
     setAddMoreSelection(false);
     setFoodChoices([]);
-    foodList.map(food => {
-      food.onChoices = false;
-    })
+    foodList.map(food => 
+    (
+        food.onChoices = false
+    ))
   }
 
   return (

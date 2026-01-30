@@ -30,7 +30,7 @@ const Spin = () => {
     }
 
     setWheelContent(shuffleArray([...repeated]));
-  }, []);
+  }, [foodChoices]);
 
 
   useEffect(() => {
