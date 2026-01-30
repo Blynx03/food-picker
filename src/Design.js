@@ -1,9 +1,9 @@
 import React from "react";
 
 const Design = () => {
-  const DesignPatternCol = () => {
+  const DesignPatternCol = (i) => {
     const col = [];
-    for (let j = 0; j <= 4; j++) {
+    for (let j = 0; j <= i; j++) {
       col.push(
         <div key={`col${j}`} className="design-pattern">
           Food Picker
@@ -15,10 +15,10 @@ const Design = () => {
 
   const DesignPatternRow = () => {
     const row = [];
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 12; i++) {
       row.push(
         <div key={`row${i}`} className="design-pattern-container">
-          {DesignPatternCol()}
+          {DesignPatternCol(12)}
         </div>
       );
     }

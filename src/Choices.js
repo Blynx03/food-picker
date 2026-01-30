@@ -1,21 +1,19 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { UserContext } from "./UserContext";
 import "./App.css";
 
 const Choices = () => {
   const clientContext = useContext(UserContext);
-  const foodList = clientContext.foodList;
-  const setFoodList = clientContext.setFoodList;
-  const foodChoices = clientContext.foodChoices;
-  const setAreChoicesIn = clientContext.setAreChoicesIn;
-  const refNoChoices = useRef(null);
+  const { foodList, setFoodList, foodChoices, setFoodChoices, setAreChoicesIn } = clientContext;
+  const [ addMoreSelection, setAddMoreSelection ] = useState(false);
+  const noChoicesRef = useRef(null);
   let enteredKeys = [];
 
   let hasChoice = foodList.some((food) => food.onChoices);
 
   function handleKeyDown(e) {
     console.log(e.key);
-    refNoChoices.current.style.display = "none";
+    noChoicesRef.current.style.display = "none";
 
     if (e.key === "Enter") {
       let newFood = enteredKeys.join("");
@@ -23,15 +21,15 @@ const Choices = () => {
         return food.place.toLowerCase() === newFood.toLowerCase();
       });
       if (alreadyListed) {
-        refNoChoices.current.style.display = "block";
-        refNoChoices.current.textContent = "This is already listed";
+        noChoicesRef.current.style.display = "block";
+        noChoicesRef.current.textContent = "This is already listed";
         enteredKeys.length = 0;
         return;
       } else {
         setFoodList([...foodList, { place: newFood, onChoices: true }]);
         enteredKeys.length = 0; // this will reset the input field
         document.querySelector(".added-choice-input").value = "";
-        refNoChoices.current.textContent = "Pick your selection first.";
+        noChoicesRef.current.textContent = "Pick your selection first.";
       }
     } else if (e.key === "Backspace" || e.key === "Delete") {
       enteredKeys.pop();
@@ -56,10 +54,25 @@ const Choices = () => {
           foodChoices.push(place);
         }
       });
-      setAreChoicesIn(true);
+      console.log('food choices length ', foodChoices.length)
+      if (foodChoices.length < 2) {
+        setAddMoreSelection(true);
+        noChoicesRef.current.style.display = 'block';
+      } else {
+        setAreChoicesIn(true);
+      }
     } else {
-      refNoChoices.current.style.display = "block";
+      noChoicesRef.current.style.display = "block";
     }
+  }
+
+  function handleReset() {
+    setAreChoicesIn(false);
+    setAddMoreSelection(false);
+    setFoodChoices([]);
+    foodList.map(food => {
+      food.onChoices = false;
+    })
   }
 
   return (
@@ -77,7 +90,7 @@ const Choices = () => {
                 checked={onChoices}
                 className="choices"
                 onChange={() => {
-                  refNoChoices.current.style.display = "none";
+                  noChoicesRef.current.style.display = "none";
                   setFoodList((prevFoodList) => {
                     let updatedFoodList = [...prevFoodList];
                     updatedFoodList[index].onChoices = !onChoices;
@@ -100,10 +113,13 @@ const Choices = () => {
             placeholder="Enter Food/Restaurant..."
           ></input>
         </div>
+        { hasChoice
+          ? <button className="reset-button btn" onClick={() => handleReset()}>Reset</button> 
+          : null }
       </div>
       <div className="no-choices-enter-btn-container">
-        <div ref={refNoChoices} className="no-choices">
-          Pick your selections first..
+        <div ref={noChoicesRef} className="no-choices">
+          {addMoreSelection ? "Pick more selection/s." : "Pick your selections first."}
         </div>
         <button className="enter-button" onClick={handleClick}>
           Enter the Spin Zone!

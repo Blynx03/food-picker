@@ -1,61 +1,54 @@
-import React, { useRef, useContext, useEffect } from "react";
+import React, { useRef, useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
 import "./App.css";
 
 const Spin = () => {
   const clientContext = useContext(UserContext);
-  const foodChoices = clientContext.foodChoices;
-  const setFoodChoices = clientContext.setFoodChoices;
-  const setAreChoicesIn = clientContext.setAreChoicesIn;
-  const refFoodContainer = useRef(null);
-  const refPlace = useRef(null);
-  const wheelContent = [];
+  const { foodChoices, setFoodChoices, setAreChoicesIn } = clientContext;
+  const foodContainerRef = useRef(null);
+  const placeRef = useRef(null);
+  const [ wheelContent, setWheelContent ] = useState([]);
   //   let elementHeight = 0;
 
   function shuffleArray(array) {
+    console.log('array ', array)
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
+    return array;
   }
 
   useEffect(() => {
-    const copiedChoices = [...foodChoices];
-    shuffleArray(copiedChoices);
-    setFoodChoices(copiedChoices);
-  }, [setFoodChoices]);
+    if (!foodChoices.length) return;
 
-  console.log(foodChoices);
-  //   console.log(copiedChoices);
+    const repeated = [];
+    const repeatCount = Math.floor(500 / foodChoices.length);
 
-  let counter = 0;
-  while (counter <= Math.floor(500 / foodChoices.length)) {
-    foodChoices.forEach((food) => {
-      wheelContent.push(food);
-    });
-    counter++;
-  }
+    for (let i = 0; i <= repeatCount; i++) {
+      repeated.push(...foodChoices);
+    }
+
+    setWheelContent(shuffleArray([...repeated]));
+  }, []);
+
 
   useEffect(() => {
-    // elementHeight = refPlace.current.offsetHeight;
-    // const totalHeight = elementHeight * 1000;
-    refFoodContainer.current.style.height = "38000px";
-    // console.log(elementHeight);
-    // console.log(totalHeight);
-  }, [refFoodContainer]);
+    foodContainerRef.current.style.height = "38000px";
+  }, [foodContainerRef]);
 
   function handleSpin() {
-    refFoodContainer.current.style.animation =
+    foodContainerRef.current.style.animation =
       "spin-fast 2000ms linear, spin 4500ms ease-out 2000ms forwards";
-  }
+  };
 
   return (
     <div className="spin-container">
       <div className="wheel-container">
-        <div ref={refFoodContainer} className="food-choices-container">
+        <div ref={foodContainerRef} className="food-choices-container">
           {wheelContent.map((place, index) => {
             return (
-              <div ref={refPlace} key={index} className="place">
+              <div ref={placeRef} key={index} className="place">
                 {place}
               </div>
             );
