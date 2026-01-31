@@ -18,7 +18,7 @@ The app is designed primarily for **mobile devices**, with full desktop support.
 
 The main page introduces the app and guides users into the selection flow.
 
-<img src="./images/fpicker-main.png" alt="Food Picker main page" width="320" />
+![Alt test](src/images/fpicker-main.png)
 
 ---
 
@@ -26,7 +26,7 @@ The main page introduces the app and guides users into the selection flow.
 
 Users begin by preparing their list of food or restaurant options.
 
-<img src="./images/fpicker-selection.png" alt="Food selection page" width="320" />
+![Alt test](src/images/fpicker-selection.png)
 
 This page shows the current list of choices and prepares users for adding more.
 
@@ -36,7 +36,7 @@ This page shows the current list of choices and prepares users for adding more.
 
 Users can enter custom food or restaurant options using a simple input interface.
 
-<img src="./images/fpicker-add-selection.png" alt="Add food input area" width="320" />
+![Alt test](src/images/fpicker-add-selection.png)
 
 There is no limit to how many options can be added, keeping the experience flexible and user-driven.
 
@@ -46,7 +46,7 @@ There is no limit to how many options can be added, keeping the experience flexi
 
 Once the list is ready, users proceed to the spin zone.
 
-<img src="./images/fpicker-spin-zone.png" alt="Enter spin zone button" width="320" />
+![Alt test](src/images/fpicker-spin-zone.png)
 
 This action transitions the app into the randomized selection phase.
 
@@ -56,7 +56,7 @@ This action transitions the app into the randomized selection phase.
 
 The spin page displays the roulette interface and handles the selection logic.
 
-<img src="./images/fpicker-spin-page.png" alt="Spin page" width="320" />
+![Alt test](src/images/fpicker-spin-page.png)
 
 The layout is optimized for touch interaction, making it ideal for mobile use.
 
@@ -66,7 +66,7 @@ The layout is optimized for touch interaction, making it ideal for mobile use.
 
 The roulette visually spins and lands on a single food option.
 
-<img src="./images/fpicker-roulette.png" alt="Roulette wheel result" width="320" />
+![Alt test](src/images/fpicker-roulette.png)
 
 The selected result is clearly displayed, removing guesswork and decision fatigue.
 
